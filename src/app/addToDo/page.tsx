@@ -1,4 +1,15 @@
+"use client"
+import { addTodos } from "@/redux/Slice";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
 export default function page() {
+    const [taskName, setTaskName]= useState<string>("");
+    const dispatch = useDispatch();
+    const handleAddTodo=()=>{
+        dispatch(addTodos(taskName));
+        alert(taskName);
+        setTaskName("");
+    }
     return (
         <>
         <div className="flex flex-col items-center justify-center py-2 px-4 min-h-[calc(100vh-4rem)] bg-gradient-to-br from-blue-100 to-purple-100">
@@ -15,10 +26,12 @@ export default function page() {
                 <input
                     id="todo-input"
                     type="text"
+                    value={taskName}
                     placeholder="Add a new task"
                     className="border border-gray-300 rounded-lg p-3 w-full focus:outline-none focus:ring-2 focus:ring-blue-400 transition"
+                    onChange={(e)=>setTaskName(e.target.value)}
                 />
-                <button className="w-full bg-blue-600 hover:bg-blue-700 text-white rounded-lg px-4 py-3 mt-6 font-semibold shadow transition">
+                <button onClick={handleAddTodo} className="w-full bg-blue-600 hover:bg-blue-700 text-white rounded-lg px-4 py-3 mt-6 font-semibold shadow transition">
                     Add Task
                 </button>
             </div>

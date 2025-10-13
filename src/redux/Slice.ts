@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, nanoid } from "@reduxjs/toolkit";
 import {ToDo} from "@/types/type"
 
 const initialState = {
@@ -9,8 +9,13 @@ const slice = createSlice({
     name: "todos",
     initialState,
     reducers:{
-        addTodos:(state,action)=>{
-            state.todos.push(action.payload)
+        addTodos:(state : { todos: ToDo[] }, action)=>{
+            console.log("in the slice value is : ", action);
+            
+            state.todos.push({
+                id: nanoid(),
+                task: action.payload,
+            })
         }
     }
 })

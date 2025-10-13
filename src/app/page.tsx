@@ -1,15 +1,13 @@
 "use client";
+import { ToDo } from "@/types/type";
 import { useState } from "react";
+import { useSelector } from "react-redux";
 
 export default function Home() {
-  const [todos, setTodos] = useState([
-    "Buy groceries",
-    "Finish React project",
-    "Read a book",
-  ]);
+  const todos = useSelector((state: any) => state.todos.todos);
 
   const removeTodo = (index: number) => {
-    setTodos(todos.filter((_, i) => i !== index));
+   
   };
 
   return (
@@ -20,12 +18,12 @@ export default function Home() {
           Here is my all todos list.
         </p>
         <ul className="space-y-4">
-          {todos.map((todo, idx) => (
+          {todos.map((todo: ToDo, idx: number) => (
             <li
               key={idx}
               className="flex items-center justify-between bg-purple-50 rounded-lg px-4 py-3 shadow hover:shadow-lg transition"
             >
-              <span className="text-gray-800">{todo}</span>
+              <span className="text-gray-800">{todo.task}</span>
               <button
                 onClick={() => removeTodo(idx)}
                 className="ml-4 p-2 rounded-full hover:bg-red-100 transition text-red-600 font-semibold"
