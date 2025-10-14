@@ -10,15 +10,16 @@ const slice = createSlice({
     initialState,
     reducers:{
         addTodos:(state : { todos: ToDo[] }, action)=>{
-            console.log("in the slice value is : ", action);
-            
             state.todos.push({
                 id: nanoid(),
                 task: action.payload,
             })
+        },
+        removeTodos:(state : {todos : ToDo[]}, action)=>{
+            state.todos = state.todos.filter(todo => todo.id !== action.payload);
         }
     }
 })
 
-export const {addTodos} = slice.actions;
+export const {addTodos, removeTodos} = slice.actions;
 export default slice.reducer;
